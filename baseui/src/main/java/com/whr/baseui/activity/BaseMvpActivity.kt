@@ -11,7 +11,7 @@ import com.whr.baseui.utils.MvpUtils
  * Created by whr on 2018/6/6.
  */
 
-abstract class BaseMvpActivity<P : BaseMvpPresenter<BaseMvpView>> : BaseActivity() {
+abstract class BaseMvpActivity<V : BaseMvpView, P : BaseMvpPresenter<V>> : BaseActivity() {
     var presenter: P? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +20,8 @@ abstract class BaseMvpActivity<P : BaseMvpPresenter<BaseMvpView>> : BaseActivity
     }
 
     private fun initMvp() {
-        presenter = MvpUtils.getT<P>(this, 0)
-        presenter!!.attchView(this)
+        presenter = MvpUtils.getT<P>(this, 1)
+        presenter!!.attchView(this as V)
     }
 
     override fun onDestroy() {

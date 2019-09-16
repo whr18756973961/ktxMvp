@@ -328,6 +328,14 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         return mActivity
     }
 
+    override fun getmFragment(): BaseFragment? {
+        return null
+    }
+
+    override fun isWaitDialogShow(): Boolean {
+        return mActivity.isWaitDialogShow()
+    }
+
     override fun getWaitDialog(): Dialog {
         return mActivity.getWaitDialog()
     }
@@ -342,12 +350,13 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
+
     override fun showToast(strId: Int) {
         Toast.makeText(this, getString(strId), Toast.LENGTH_SHORT).show()
     }
 
-    override fun showToast(strId1: Int, strId2: Int) {
-        Toast.makeText(this, getString(strId1) + getString(strId2), Toast.LENGTH_SHORT).show()
+    override fun showToast(strId1: Int, str: Int) {
+        Toast.makeText(this, getString(strId1) + getString(str), Toast.LENGTH_SHORT).show()
     }
 
     override fun showToast(strId1: Int, strin2: String) {

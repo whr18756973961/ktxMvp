@@ -18,7 +18,7 @@ class UiCoreHelper {
 
         fun getProxyA(): IUiCoreProxy {
             if (proxy == null)
-                throw NullPointerException("IUiCoreProxy is null, plase use setUiCoreProxy(setUiCoreProxy iUiCoreProxy) method in somewhere")
+                throw NullPointerException("IUiCoreProxy is null, plase use setUiCoreProxy(setUiCoreProxy iUiCoreProxy) method in somewhere") as Throwable
             return proxy as IUiCoreProxy
         }
 

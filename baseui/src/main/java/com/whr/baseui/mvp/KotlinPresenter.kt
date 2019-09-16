@@ -39,7 +39,7 @@ abstract class KotlinPresenter<V : BaseMvpView> : BaseMvpPresenter<V>() {
         }
     }
 
-    fun launchOnUITryCatch(
+    fun launchWithTryCatch(
         tryBlock: suspend CoroutineScope.() -> Unit,
         catchBlock: suspend CoroutineScope.(String?) -> Unit,
         finallyBlock: suspend CoroutineScope.() -> Unit
@@ -52,8 +52,7 @@ abstract class KotlinPresenter<V : BaseMvpView> : BaseMvpPresenter<V>() {
     private suspend fun tryCatch(
         tryBlock: suspend CoroutineScope.() -> Unit,
         catchBlock: suspend CoroutineScope.(String?) -> Unit,
-        finallyBlock: suspend CoroutineScope.() -> Unit
-    ) {
+        finallyBlock: suspend CoroutineScope.() -> Unit) {
         coroutineScope {
             try {
                 tryBlock()

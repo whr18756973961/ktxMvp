@@ -15,7 +15,7 @@ interface BaseMvpView {
 
     fun getWaitDialog(): Dialog
 
-    fun getmFragment(): BaseFragment
+    fun getmFragment(): BaseFragment?
 
     fun showWaitDialog()
 
@@ -31,7 +31,7 @@ interface BaseMvpView {
 
     fun showToast(strId: Int)
 
-    fun showToast(strId1: Int, strin2: Int)
+    fun showToast(strId1: Int, str: Int)
 
     fun showToast(strId1: Int, strin2: String)
 

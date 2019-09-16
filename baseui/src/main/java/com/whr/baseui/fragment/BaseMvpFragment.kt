@@ -13,12 +13,13 @@ import com.whr.baseui.utils.MvpUtils
  * Created by whr on 2018/6/6.
  */
 
-abstract class BaseMvpFragment<P : BaseMvpPresenter<BaseMvpView>> : BaseFragment() {
+abstract class BaseMvpFragment<V : BaseMvpView, P : BaseMvpPresenter<V>> :
+    BaseFragment() {
 
     var presenter: P? = null
     private fun initMvp() {
-        presenter = MvpUtils.getT<P>(this, 0)
-        presenter!!.attchView(this)
+        presenter = MvpUtils.getT<P>(this, 1)
+        presenter!!.attchView(this as V)
     }
 
     override fun onCreateView(

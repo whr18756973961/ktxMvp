@@ -1,0 +1,4 @@
+<resources>
+	<dimen name="action_bar_height">48dp</dimen>
+	<dimen name="statusbar_view_height">0dp</dimen>
+</resources>

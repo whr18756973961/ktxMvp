@@ -210,6 +210,10 @@ abstract class BaseFragment : SwipeBackFragment(), BaseMvpView {
         return mActivity
     }
 
+    override fun getmFragment(): BaseFragment ?{
+        return null
+    }
+
     override fun hideWaitDialog() {
         mActivity.hideWaitDialog()
     }

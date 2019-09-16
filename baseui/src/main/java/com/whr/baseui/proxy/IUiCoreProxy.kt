@@ -25,7 +25,7 @@ abstract class IUiCoreProxy {
      *
      * @return
      */
-    abstract val context: Context
+    abstract fun getContext(): Context
 
     /**
      * 配置主题颜色
@@ -122,7 +122,7 @@ abstract class IUiCoreProxy {
      *
      * @return
      */
-    abstract fun loginFragment(): Class<out Fragment>
+    abstract fun loginFragment(): Class<out Fragment> ?
 
     /**
      * 设置是否登录成功了

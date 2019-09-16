@@ -1,0 +1,9 @@
+<resources>
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <!-- dialog背景样式 -->
+        <item name="android:windowBackground"> @android:color/transparent </item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+</resources>

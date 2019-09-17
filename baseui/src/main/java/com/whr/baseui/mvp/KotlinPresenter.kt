@@ -1,12 +1,18 @@
-package com.xiaozhoudao.loanassistant.api
+package com.whr.baseui.mvp
 
+import android.content.Intent
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.whr.baseui.bean.Result
 import com.whr.baseui.mvp.BaseMvpPresenter
 import com.whr.baseui.mvp.BaseMvpView
+import com.whr.baseui.utils.EmptyUtils
 import kotlinx.coroutines.*
+import org.apache.http.conn.ConnectTimeoutException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
 /**
  * 用于配置底层协程操作的presenter、
@@ -52,15 +58,45 @@ abstract class KotlinPresenter<V : BaseMvpView> : BaseMvpPresenter<V>() {
     private suspend fun tryCatch(
         tryBlock: suspend CoroutineScope.() -> Unit,
         catchBlock: suspend CoroutineScope.(String?) -> Unit,
-        finallyBlock: suspend CoroutineScope.() -> Unit) {
+        finallyBlock: suspend CoroutineScope.() -> Unit
+    ) {
         coroutineScope {
             try {
                 tryBlock()
             } catch (e: Throwable) {
-                var errMsg = e.message
+                var errMsg = ""
+                when (e) {
+                    is UnknownHostException -> {
+                        errMsg = "No network..."
+                    }
+                    is SocketTimeoutException -> {
+                        errMsg = "Request timeout..."
+                    }
+                    is NumberFormatException -> {
+                        errMsg = "Request failed, type conversion exception"
+                    }
+                    else ->
+                        errMsg = e.message.toString()
+                }
                 catchBlock(errMsg)
             } finally {
                 finallyBlock()
+            }
+        }
+    }
+
+    /**
+     * 主要用于处理返回的response是否请求成功
+     */
+    suspend fun <T> callResponse(
+        response: Result<T>?, successBlock: suspend CoroutineScope.() -> Unit,
+        errorBlock: suspend CoroutineScope.() -> Unit
+    ) {
+        coroutineScope {
+            when {
+                response == null || EmptyUtils.isEmpty(response) -> errorBlock()
+                response.code == 200 -> successBlock()
+                else -> errorBlock()
             }
         }
     }

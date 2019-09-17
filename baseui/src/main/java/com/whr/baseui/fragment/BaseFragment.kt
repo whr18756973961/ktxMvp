@@ -218,7 +218,7 @@ abstract class BaseFragment : SwipeBackFragment(), BaseMvpView {
         mActivity.hideWaitDialog()
     }
 
-    override fun showToast(msg: String) {
+    override fun showToast(msg: String?) {
         mActivity.showToast(msg)
     }
 
@@ -230,7 +230,7 @@ abstract class BaseFragment : SwipeBackFragment(), BaseMvpView {
         mActivity.showToast(strId1, strin2)
     }
 
-    override fun showToast(strId1: Int, strin2: String) {
+    override fun showToast(strId1: Int, strin2: String?) {
         mActivity.showToast(strId1, strin2)
     }
 

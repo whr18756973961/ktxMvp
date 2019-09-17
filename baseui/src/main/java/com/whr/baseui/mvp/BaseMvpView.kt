@@ -27,13 +27,13 @@ interface BaseMvpView {
 
     fun hideWaitDialog()
 
-    fun showToast(msg: String)
+    fun showToast(msg: String?)
 
     fun showToast(strId: Int)
 
     fun showToast(strId1: Int, str: Int)
 
-    fun showToast(strId1: Int, strin2: String)
+    fun showToast(strId1: Int, strin2: String?)
 
     fun showStatusEmptyView(emptyMessage: String)
 

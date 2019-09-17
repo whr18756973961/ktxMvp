@@ -42,6 +42,7 @@ object ApiHelper {
             .connectTimeout(20, TimeUnit.SECONDS)
             .retryOnConnectionFailure(true)
             .addInterceptor(headerInter)
+            .addInterceptor(LoggingInterceptor())
             .build()
         //网络接口配置
         api = null

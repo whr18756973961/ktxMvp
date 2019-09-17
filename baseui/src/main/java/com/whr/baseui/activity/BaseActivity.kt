@@ -346,7 +346,7 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         }
     }
 
-    override fun showToast(msg: String) {
+    override fun showToast(msg: String?) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
@@ -359,7 +359,7 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         Toast.makeText(this, getString(strId1) + getString(str), Toast.LENGTH_SHORT).show()
     }
 
-    override fun showToast(strId1: Int, strin2: String) {
+    override fun showToast(strId1: Int, strin2: String?) {
         Toast.makeText(this, getString(strId1) + strin2, Toast.LENGTH_SHORT).show()
     }
 

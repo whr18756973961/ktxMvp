@@ -24,6 +24,9 @@ abstract class KotlinPresenter<V : BaseMvpView> : BaseMvpPresenter<V>() {
         CoroutineScope(Dispatchers.Main + Job())
     }
 
+    /**
+     * 当页面被销户时协程要取消
+     */
     @ExperimentalCoroutinesApi
     override fun detachView() {
         presenterScope.cancel()
@@ -63,6 +66,48 @@ abstract class KotlinPresenter<V : BaseMvpView> : BaseMvpPresenter<V>() {
         coroutineScope {
             try {
                 tryBlock()
+            } catch (e: Throwable) {
+                catchBlock(e.message)
+            } finally {
+                finallyBlock()
+            }
+        }
+    }
+
+    /**
+     * 网络请求
+     *
+     */
+    fun <T> launchRequest(
+        tryBlock: suspend CoroutineScope.() -> Result<T>?,
+        successBlock: suspend CoroutineScope.(T?) -> Unit,
+        catchBlock: suspend CoroutineScope.(String?) -> Unit,
+        finallyBlock: suspend CoroutineScope.() -> Unit
+    ) {
+        launchOnUI {
+            requestTryCatch(tryBlock, successBlock, catchBlock, finallyBlock)
+        }
+    }
+
+
+    private suspend fun <T> requestTryCatch(
+        tryBlock: suspend CoroutineScope.() -> Result<T>?,
+        successBlock: suspend CoroutineScope.(T?) -> Unit,
+        catchBlock: suspend CoroutineScope.(String?) -> Unit,
+        finallyBlock: suspend CoroutineScope.() -> Unit
+    ) {
+        coroutineScope {
+            try {
+                var response = tryBlock()
+                callResponse(
+                    response,
+                    {
+                        successBlock(response?.getData())
+                    },
+                    {
+                        catchBlock(response?.getMessage())
+                    }
+                )
             } catch (e: Throwable) {
                 var errMsg = ""
                 when (e) {

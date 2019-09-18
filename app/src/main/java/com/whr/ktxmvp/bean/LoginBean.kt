@@ -1,4 +1,4 @@
-package com.whr.ktxmvp.api
+package com.whr.ktxmvp.bean
 
 class LoginBean {
     var key: String? = null

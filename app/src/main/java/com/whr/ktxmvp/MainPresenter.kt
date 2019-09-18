@@ -1,29 +1,43 @@
 package com.whr.ktxmvp
 
 import com.whr.ktxmvp.api.ApiHelper
+import com.whr.ktxmvp.bean.LoginBean
+import com.whr.ktxmvp.bean.RegisterBean
 
 class MainPresenter : MainContract.Presenter() {
-    override fun request() {
+
+
+    override fun requestLogin() {
         view?.showWaitDialog()
-        launchWithTryCatch(
+        launchRequest(
             {
-                var response = ApiHelper.api()?.requestLoginOut()?.await()
-                callResponse(
-                    response,
-                    {
-                        view?.requestSuccess(response?.getData())
-                    },
-                    {
-                        view?.requestError(response?.getMessage())
-                    }
-                )
+                ApiHelper.api()?.requestLoginOut()?.await()
             },
-            { e ->
-                view?.requestError(e)
+            { loginBean: LoginBean? ->
+                view?.requestSuccess(loginBean)
+            },
+            { errMsg: String? ->
+                view?.requestError(errMsg)
             },
             {
                 view?.hideWaitDialog()
             })
 
+    }
+
+    override fun requestRegister() {
+        view?.showWaitDialog()
+        launchRequest(
+            { ApiHelper.api()?.requestRegister("123325554444", "123445")?.await() },
+            { register: RegisterBean? ->
+                view?.requestRegister(register)
+            },
+            { errMsg: String? ->
+                view?.requestError(errMsg)
+            },
+            {
+                view?.hideWaitDialog()
+            }
+        )
     }
 }

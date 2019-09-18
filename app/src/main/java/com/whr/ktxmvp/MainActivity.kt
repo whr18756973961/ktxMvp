@@ -8,11 +8,11 @@ import com.whr.ktxmvp.bean.RegisterBean
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvpActivity<MainContract.View, MainPresenter>(), MainContract.View {
-    override fun requestRegister(registerBean: RegisterBean?) {
+    override fun requestRegisterSuccess(registerBean: RegisterBean?) {
         tv_txt.setText(Gson().toJson(registerBean))
     }
 
-    override fun requestSuccess(loginBean: LoginBean?) {
+    override fun requestLoginSuccess(loginBean: LoginBean?) {
         tv_txt.setText(Gson().toJson(loginBean))
     }
 

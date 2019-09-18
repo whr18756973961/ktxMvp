@@ -15,7 +15,7 @@ class MainPresenter : MainContract.Presenter() {
                 ApiHelper.api()?.requestLoginOut(phone,password)?.await()
             },
             { loginBean: LoginBean? ->
-                view?.requestSuccess(loginBean)
+                view?.requestLoginSuccess(loginBean)
             },
             { errMsg: String? ->
                 view?.requestError(errMsg)
@@ -31,7 +31,7 @@ class MainPresenter : MainContract.Presenter() {
         launchRequest(
             { ApiHelper.api()?.requestRegister(phone,password)?.await() },
             { register: RegisterBean? ->
-                view?.requestRegister(register)
+                view?.requestRegisterSuccess(register)
             },
             { errMsg: String? ->
                 view?.requestError(errMsg)

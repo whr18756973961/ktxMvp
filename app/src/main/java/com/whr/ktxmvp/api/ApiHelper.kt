@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit
 
 object ApiHelper {
     private var api: ApiServices? = null
-    private var apiGson: ApiServices? = null
 
     fun api(): ApiServices? {
         if (api == null)
@@ -34,7 +33,6 @@ object ApiHelper {
             chain.proceed(builder.build())
         }
 
-
         val mOkHttpClient = OkHttpClient()
             .newBuilder()
             .readTimeout(20, TimeUnit.SECONDS)
@@ -50,7 +48,7 @@ object ApiHelper {
             .baseUrl("https://www.apiopen.top/")
             .addConverterFactory(ScalarsConverterFactory.create())       //添加字符串的转换器
             .addConverterFactory(GsonConverterFactory.create())          //添加gson的转换器
-            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())   //添加携程的请求适配器            .client(mOkHttpClient)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())   //添加协程的请求适配器            .client(mOkHttpClient)
             .client(mOkHttpClient)
             .build()
             .create(ApiServices::class.java)

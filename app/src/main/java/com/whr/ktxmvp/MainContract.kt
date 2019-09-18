@@ -7,11 +7,11 @@ import com.whr.ktxmvp.bean.RegisterBean
 
 interface MainContract {
     interface View : BaseMvpView {
-        fun requestSuccess(loginBean: LoginBean?)
+        fun requestLoginSuccess(loginBean: LoginBean?)
 
         fun requestError(str: String?)
 
-        fun requestRegister(registerBean: RegisterBean?)
+        fun requestRegisterSuccess(registerBean: RegisterBean?)
     }
 
     abstract class Presenter : KotlinPresenter<View>() {

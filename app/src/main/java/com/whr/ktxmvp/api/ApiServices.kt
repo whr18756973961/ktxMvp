@@ -11,8 +11,9 @@ interface ApiServices {
     /**
      * 用户登录
      */
-    @GET("login?key=00d91e8e0cca2b76f515926a36db68f5&phone=13594347817&passwd=123456")
-    fun requestLoginOut(): Deferred<Result<LoginBean>>
+    @GET("login?key=00d91e8e0cca2b76f515926a36db68f5")
+    fun requestLoginOut( @Query("phone") phone: String,
+                         @Query("passwd") passwd: String): Deferred<Result<LoginBean>>
 
     @GET("createUser?key=00d91e8e0cca2b76f515926a36db68f5")
     fun requestRegister(

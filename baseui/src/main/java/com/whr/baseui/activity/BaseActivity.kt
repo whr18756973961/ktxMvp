@@ -178,7 +178,6 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         setContentView(mRootView)
         if (null != intent) handleIntent(intent)
         initView(mRootView)
-        rxBusOperate()
         if (Build.VERSION.SDK_INT == 26) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         } else {
@@ -194,21 +193,6 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
         mIvBack.setOnClickListener { onActivityFinish() }
         mBtmLine = mHeadView.findViewById(UiCoreHelper.getProxyA().headerBtmLineId())
     }
-
-    fun <V : View> findView(@IdRes viewId: Int, click: Boolean): V {
-        if (mViews == null) mViews = SparseArray()
-        var view: V? = mViews!!.get(viewId) as V
-        if (view != null) return view
-        view = findViewById<View>(viewId) as V
-        mViews!!.put(viewId, view)
-        if (click) view.setOnClickListener(this)
-        return view
-    }
-
-    fun <V : View> findView(@IdRes viewId: Int): V {
-        return findView(viewId, false)
-    }
-
     /**
      * @param view
      * @param <E>
@@ -353,14 +337,6 @@ abstract class BaseActivity : SwipeBackActivity(), BaseMvpView, View.OnClickList
 
     override fun showToast(strId: Int) {
         Toast.makeText(this, getString(strId), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showToast(strId1: Int, str: Int) {
-        Toast.makeText(this, getString(strId1) + getString(str), Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showToast(strId1: Int, strin2: String?) {
-        Toast.makeText(this, getString(strId1) + strin2, Toast.LENGTH_SHORT).show()
     }
 
     /**

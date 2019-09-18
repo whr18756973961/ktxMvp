@@ -31,10 +31,6 @@ interface BaseMvpView {
 
     fun showToast(strId: Int)
 
-    fun showToast(strId1: Int, str: Int)
-
-    fun showToast(strId1: Int, strin2: String?)
-
     fun showStatusEmptyView(emptyMessage: String)
 
     fun showStatusErrorView(emptyMessage: String)

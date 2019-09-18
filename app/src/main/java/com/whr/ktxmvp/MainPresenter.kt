@@ -5,13 +5,14 @@ import com.whr.ktxmvp.bean.LoginBean
 import com.whr.ktxmvp.bean.RegisterBean
 
 class MainPresenter : MainContract.Presenter() {
-
+    val phone = "135545842326"
+    val password = "123456"
 
     override fun requestLogin() {
         view?.showWaitDialog()
         launchRequest(
             {
-                ApiHelper.api()?.requestLoginOut()?.await()
+                ApiHelper.api()?.requestLoginOut(phone,password)?.await()
             },
             { loginBean: LoginBean? ->
                 view?.requestSuccess(loginBean)
@@ -28,7 +29,7 @@ class MainPresenter : MainContract.Presenter() {
     override fun requestRegister() {
         view?.showWaitDialog()
         launchRequest(
-            { ApiHelper.api()?.requestRegister("123325554444", "123445")?.await() },
+            { ApiHelper.api()?.requestRegister(phone,password)?.await() },
             { register: RegisterBean? ->
                 view?.requestRegister(register)
             },

@@ -226,16 +226,8 @@ abstract class BaseFragment : SwipeBackFragment(), BaseMvpView {
         mActivity.showToast(strId)
     }
 
-    override fun showToast(strId1: Int, strin2: Int) {
-        mActivity.showToast(strId1, strin2)
-    }
-
-    override fun showToast(strId1: Int, strin2: String?) {
-        mActivity.showToast(strId1, strin2)
-    }
-
     /**
-     * 此方法会在fragment ，显示是调用，相当于fragment的onresume方法，可以做返回刷新操作
+     * 此方法会在fragment ，显示是调用，相当于fragment的onresume方法，可以做返回刷新UI等操作
      */
     fun onFragmentVisiable() {
 
